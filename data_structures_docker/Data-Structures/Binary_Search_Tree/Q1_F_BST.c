@@ -93,10 +93,10 @@ int main()
 
 void levelOrderTraversal(BSTNode* root)
 {
-	if (root == NULL) {
-		return 0;
-	}
-	
+	// if (root == NULL) {
+	// 	return 0;
+	// }
+
     /* add your code here */
 }
 
