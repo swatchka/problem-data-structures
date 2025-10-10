@@ -116,12 +116,25 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	removeAllItemsFromQueue(q);   // 혹시 기존 큐에 내용이 있으면 비워줌
+    ListNode *cur = ll->head;
+    while(cur != NULL) {
+        enqueue(q, cur->item); // cur이란 주소에 item이란 값을 넣겠다.
+        cur = cur->next; // cur 다음 주소로 갱신
+    }
 }
 
-void removeOddValues(Queue *q)
+void removeOddValues(Queue *q) // 리스트에서 홀수 삭제
 {
-	/* add your code here */
+	if (q == NULL || isEmptyQueue(q)) return;
+
+    int size = q->ll.size;  // 현재 큐의 원소 개수
+    for(int i = 0; i < size; i++) {
+        int val = dequeue(q);
+        if(val % 2 == 0) {     // 짝수만 다시 enqueue
+            enqueue(q, val);
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -228,12 +241,11 @@ int insertNode(LinkedList *ll, int index, int value){
 		{
 			exit(0);
 		}
-		ll->head->item = value;
-		ll->head->next = cur;
+		ll->head->item = value; // 입력한값 넣고
+		ll->head->next = cur; // 앞에값이 담긴 주소값 넣고
 		ll->size++;
 		return 0;
 	}
-
 
 	// Find the nodes before and at the target position
 	// Create a new node and reconnect the links
