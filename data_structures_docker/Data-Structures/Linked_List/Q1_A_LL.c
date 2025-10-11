@@ -13,7 +13,7 @@ Purpose: Implementing the required functions for Question 1 */
 
 typedef struct _listnode{
 	int item;
-	struct _listnode *next;
+	struct _listnode *next; // 자기 구조체 주서를 기억
 } ListNode;			// You should not change the definition of ListNode
 
 typedef struct _linkedlist{
@@ -90,7 +90,12 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	// 새 노드 생성
+	// 빈 리스트면 head로 설정
+	// 맨 앞에 들어가야 하면 head 앞에 삽입
+	// 중간 / 끝이면 올바른 위치 찾고 끼워넣기
+	// size 증가
+	// 삽입된 인덱스 반환
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
