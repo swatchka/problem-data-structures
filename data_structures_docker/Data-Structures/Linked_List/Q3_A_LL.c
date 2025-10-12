@@ -87,6 +87,47 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	int cnt = 0;
+	ListNode *cur = ll->head; // 현재 노드 주소는 리스트의 대가리값
+	while (cur != NULL) // 리스트 끝까지 반복
+	{
+		if (cur->item % 2 != 0){ // 현재 노드의 아이템이 짝수인지 판별 
+			// 홀수일때
+			cnt++;
+		}
+		cur = cur->next;
+	}
+	for (int i = 0; i < cnt; i++){
+		ListNode *pre = NULL;
+		cur = ll->head;
+
+		while (cur != NULL && cur->item % 2 == 0){
+			pre = cur;
+			cur = cur->next;
+		}
+		// 더이상 탐색할 노드가 없을때 나가기
+		if (cur == NULL){
+			break;
+
+		// 이전 노드가 비어있지 않을때
+		}
+		if(pre != NULL){
+			pre->next = cur->next; // 이전노드의 다음주소에 현재 주소의 다음 노드 대입
+		}
+		else{
+			ll->head = cur->next;
+		}
+
+		ListNode *tail = ll->head;
+    	while (tail->next != NULL)
+		{
+        	tail = tail->next;
+		}
+
+		// 홀수 노드 
+		tail->next = cur;
+		cur->next = NULL; // 현재 노드 뜯어내기
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

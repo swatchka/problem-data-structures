@@ -13,14 +13,14 @@ Purpose: Implementing the required functions for Question 2 */
 
 typedef struct _listnode
 {
-	int item;
-	struct _listnode *next;
+	int item;    			// 값 데이터
+	struct _listnode *next;	// 다음 노드의 주소
 } ListNode;			// You should not change the definition of ListNode
 
 typedef struct _linkedlist
 {
-	int size;
-	ListNode *head;
+	int size;		// 노드 갯수
+	ListNode *head; // 첫 번째 노드의 주소
 } LinkedList;			// You should not change the definition of LinkedList
 
 
@@ -103,7 +103,23 @@ int main()
 
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
-    /* add your code here */
+	// *ll1은 리스트1의 주소, *ll2는 리스트2의 주소
+	ListNode *cur1 = ll1->head; // 리스트1의 대가리값
+	ListNode *cur2 = ll2->head; // 리스트2의 대가리값
+	ListNode *next1, *next2;
+
+	while (cur1 != NULL && cur2 != NULL){
+		next1 = cur1->next; // 리스트1 다음 노드 저장
+		next2 = cur2->next; // 리스트2 다음 노드 저장
+		// 주소 바꾸기
+		cur1->next = cur2;  // 리스트1의 다음을 리스트2로 연결
+		cur2->next = next1; // 리스트2의 다음을 리스트1의 다음으로 연결
+
+		cur1 = next1;
+		cur2 = next2;
+	}
+	// 초기값으로 각 리스트의 현재 주소를 각 리스트 노드의 대가리로 설정
+	ll2->head = cur2; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +140,6 @@ void printList(LinkedList *ll){
 	}
 	printf("\n");
 }
-
 
 void removeAllItems(LinkedList *ll)
 {
@@ -168,7 +183,7 @@ int insertNode(LinkedList *ll, int index, int value){
 	ListNode *pre, *cur;
 
 	if (ll == NULL || index < 0 || index > ll->size + 1)
-		return -1;
+		return -1; // 예외처리
 
 	// If empty list or inserting first node, need to update head pointer
 	if (ll->head == NULL || index == 0){

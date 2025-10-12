@@ -88,14 +88,24 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int insertSortedLL(LinkedList *ll, int item)
+int insertSortedLL(LinkedList *ll, int item) // case 1번 실행시 호출
 {
-	// 새 노드 생성
-	// 빈 리스트면 head로 설정
-	// 맨 앞에 들어가야 하면 head 앞에 삽입
-	// 중간 / 끝이면 올바른 위치 찾고 끼워넣기
-	// size 증가
-	// 삽입된 인덱스 반환
+	ListNode *cur;
+    int index = 0; // 인덱스 초기값
+
+	if (ll == NULL){
+		return -1;
+	}
+
+	cur = ll->head; // 초기 현재값 초기화
+
+	while (cur != NULL && cur->item <= item){
+		index++;
+		cur = cur->next;
+	}
+	insertNode(ll, index, item);
+
+	return index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

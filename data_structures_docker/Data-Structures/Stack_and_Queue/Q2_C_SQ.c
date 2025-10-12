@@ -114,11 +114,33 @@ int main()
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
     /* add your code here */
+	// removeAllItems(s);
+    ListNode *cur = ll->head;
+    while(cur != NULL) {
+        push(s, cur->item); // cur이란 주소에 item이란 값을 넣겠다.
+        cur = cur->next; // cur 다음 주소로 갱신
+    }
 }
 
 void removeEvenValues(Stack *s)
 {
 	/* add your code here */
+	if (s == NULL || isEmptyStack(s)) return;
+
+	Stack temp;
+	temp.ll.head = NULL;
+	temp.ll.size = 0;
+
+    int size = s->ll.size;
+    while (!isEmptyStack(s)) {
+        int val = pop(s);
+        if(val % 2 != 0) {     // 홀수면다시 push
+            push(&temp, val);
+        }
+    }
+	    while (!isEmptyStack(&temp)) {
+        push(s, pop(&temp));
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
