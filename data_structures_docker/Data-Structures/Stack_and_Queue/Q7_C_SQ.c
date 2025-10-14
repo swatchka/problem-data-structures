@@ -104,9 +104,36 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
-}
+	Stack s;
+	for (int i = 0; expression[i] != '\0'; i++){
+		char temp = expression[i];
 
+		if (temp == '(' || temp =='{' || temp == '['){
+			push(&s, temp);
+		}
+		else if (temp == ')' || temp == '}' || temp == ']'){
+			if (isEmptyStack(&s)){
+				return 0;	
+			}
+
+			char topChar = peek(&s);
+
+			if ((temp == ')' && topChar != '(') || // 짝이 안맞을때;;
+				(temp == '}' && topChar != '{') ||
+				(temp == ']' && topChar != '[')) {
+					return 0;
+				} 
+			pop(&s);
+		} 
+	}
+	if(!isEmptyStack(&s)){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+	
+}
 ////////////////////////////////////////////////////////////
 
 void removeAllItemsFromStack(Stack *s)

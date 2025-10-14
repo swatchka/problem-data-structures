@@ -104,6 +104,37 @@ int main()
 int isStackPairwiseConsecutive(Stack *s)
 {
   /* add your code here */
+    if (s == NULL || isEmptyStack(s)) return 1; // 스택이 비어있으면 참
+
+	Stack temp;
+	temp.ll.head = NULL;
+	temp.ll.size = 0;
+
+	int isConsecutive = 1; // healthcheck 기본값1
+
+	while (!isEmptyStack(s)) {
+		int first = pop(s);
+		if (isEmptyStack(s)) {
+			push(&temp, first); // If odd number of elements, push the last one back
+			break;
+		}
+		int second = pop(s);
+
+		if (abs(first - second) != 1) { // 각 노드의 절대값 차이가 1이 아니면 연속이 아님
+			isConsecutive = 0; // Found a non-consecutive pair
+		}
+
+		// Push the pair onto the temporary stack to maintain order
+		push(&temp, second);
+		push(&temp, first);
+	}
+
+	// Restore the original stack
+	while (!isEmptyStack(&temp)) {
+		push(s, pop(&temp));
+	}
+
+	return isConsecutive;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

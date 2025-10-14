@@ -112,7 +112,23 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	/* add your code here */
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.size = 0;
+	if (q == NULL || isEmptyQueue(q)) return;
+	// 큐에서 값을 빼서 스택에 넣는다
+    int size = q->ll.size;
+    for(int i = 0; i < size; i++) {
+        int val = dequeue(q);
+        push(&s, val); 
+    }
+	// 스택에서 다시 값을 빼서 큐에 넣는다
+	for(int i = 0; i < size; i++) {
+		int val = pop(&s);
+		enqueue(q, val); 
+	}
+	// 리버스를 구현할수 있다
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
