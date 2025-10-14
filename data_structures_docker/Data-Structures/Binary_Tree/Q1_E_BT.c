@@ -24,7 +24,7 @@ typedef struct _stackNode{
 }StackNode;
 
 typedef struct _stack{
-    StackNode *top;
+    StackNode *top; // head
 }Stack;
 
 ///////////////////////// function prototypes ////////////////////////////////////
@@ -116,7 +116,36 @@ int main()
 int identical(BTNode *tree1, BTNode *tree2)
 
 {
-   /* add your code here */
+    // 두 트리 다 NULL일때 1리턴
+    // 한쪽만 NULL일때 0리턴
+    // 둘다 NULL 아닐때
+    // 루트 값이 같은지 확인
+    // 왼쪽 서브트리끼리 재귀호출
+    // 오른쪽 서브트리끼리 재귀호출
+    // 세 조건이 모두 참이면 1, 아니면 0리턴
+    BTNode *root1 = tree1;
+    BTNode *root2 = tree2;
+    if (root1 == NULL && root2 == NULL) // 두 트리의 루트가 널일때
+    {
+        return 1;
+    }
+    else if (root1 == NULL && root2 != NULL || root1 != NULL && root2 == NULL) // 2번 혹은 1번 트리의 루트가 널일때
+    {
+        return 0;
+    }
+    else // 둘다 널이 아닐때
+    {
+        if (tree1->item == tree2->item &&
+            identical(tree1->left, tree2->left) &&
+            identical(tree1->right, tree2->right))
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    } 
 }
 
 /////////////////////////////////////////////////////////////////////////////////
