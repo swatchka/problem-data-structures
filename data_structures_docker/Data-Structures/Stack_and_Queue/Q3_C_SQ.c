@@ -112,9 +112,9 @@ int isStackPairwiseConsecutive(Stack *s)
 
 	int isConsecutive = 1; // healthcheck 기본값1
 
-	while (!isEmptyStack(s)) {
+	while (!isEmptyStack(s)) { // 끝까지 반복
 		int first = pop(s);
-		if (isEmptyStack(s)) {
+		if (isEmptyStack(s)) { // 참조 전달
 			push(&temp, first); // If odd number of elements, push the last one back
 			break;
 		}

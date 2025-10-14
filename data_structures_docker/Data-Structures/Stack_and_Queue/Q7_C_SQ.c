@@ -104,8 +104,9 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-	Stack s;
-	for (int i = 0; expression[i] != '\0'; i++){
+	// add your code here
+	Stack s; // 임이의 스택을 만들어서 거기다가 넣으면서 검사
+	for (int i = 0; expression[i] != '\0'; i++){ // 문자열 끝까지 탐색하기위한 조건
 		char temp = expression[i];
 
 		if (temp == '(' || temp =='{' || temp == '['){
@@ -126,13 +127,18 @@ int balanced(char *expression)
 			pop(&s);
 		} 
 	}
-	if(!isEmptyStack(&s)){
+	if(isEmptyStack(&s)){ // 스택이 비어있으면 참
 		return 1;
 	}
 	else{
 		return 0;
 	}
 	
+	// 우선 스택을 하나 만들어서 리스트 초반에 있는 여는 괄호들을 넣는다
+	// 마지막에 열린 괄호는 가장 먼저 닫혀야 하기 때문에(LIFO)
+	// 닫는 괄호가 나올 때마다 스택의 top에 있는 괄호와 짝이 맞는지 확인한다.
+	// 짝이 맞으면 pop하여 스택에서 제거하고, 안맞거나 스택이 비었으면 불균형으로 판단.
+	// 모든 문자를 검사한 후 스택이 비어 있으면 모든 괄호가 올바르게 닫힌 것이므로 balanced이다.
 }
 ////////////////////////////////////////////////////////////
 
