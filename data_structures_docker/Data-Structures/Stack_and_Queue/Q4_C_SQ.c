@@ -116,8 +116,9 @@ void reverse(Queue *q)
 	Stack s;
 	s.ll.head = NULL;
 	s.ll.size = 0;
-	if (q == NULL || isEmptyQueue(q)) return;
-	// 큐에서 값을 빼서 스택에 넣는다
+	if (q == NULL || isEmptyQueue(q)) 
+		return; // 큐에서 값을 빼서 스택에 넣는다
+	
     int size = q->ll.size;
     for(int i = 0; i < size; i++) {
         int val = dequeue(q);
