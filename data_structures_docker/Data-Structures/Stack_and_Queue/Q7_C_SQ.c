@@ -107,40 +107,37 @@ int balanced(char *expression)
 	// add your code here
 	Stack s; // 임이의 스택을 만들어서 거기다가 넣으면서 검사
 	for (int i = 0; expression[i] != '\0'; i++){
-		char temp = expression[i];	// 문자열 끝까지 탐색하기위한 조건 괄호가 담겨있는 문자열의 요소를 하나씩 리스트에 저장
-
-		if (temp == '(' || temp =='{' || temp == '['){
+		char temp = expression[i];	
+	// 문자열 끝까지 탐색하기위한 조건, 괄호가 담겨있는 문자열의 요소를 하나씩 리스트에 저장
+	// temp = 괄호
+		if (temp == '(' || temp =='{' || temp == '['){ // temp가 열린 괄호일때 실행
 			push(&s, temp);
 		}
-		else if (temp == ')' || temp == '}' || temp == ']'){
+		else if (temp == ')' || temp == '}' || temp == ']'){ // temp가 닫힌 괄호일때 실행
 
 			if (isEmptyStack(&s)){ // 연 괄호 스택이 비었다. 즉 열림 괄호가 없다.
 				return 1;	// not balanced 반환
 			}
 			else {
-				char topChar = peek(&s);
+				char topStack = peek(&s); // topChar = 스택 꼭대기 괄호
 
-				if ((temp == ')' && topChar != '(') || 
-					(temp == '}' && topChar != '{') || 
-					(temp == ']' && topChar != '[')) {
+				if ((temp == ')' && topStack != '(') || 
+					(temp == '}' && topStack != '{') || 
+					(temp == ']' && topStack != '[')) {
 					return 0;
 				}
 			}
-			pop(&s);
+			pop(&s); // 짝이 맞을때 열린괄호 스택 pop
 		} 
 	}
+	// 위 과정을 반복하면 스택이 비었을때와 안비었을때로 나뉨
 	if(!isEmptyStack(&s)){
-		return 0; // 아직 닫히지 않은 괄호가 남았다면 0 = not balanced
+		return 0; // 아직 닫히지 않은 괄호가 남았다면(스택이 안비었을때) 0 = not balanced
 	}
 	else{
 		return 1; // 스택이 완전히 비었다면 1 = balanced
 	}
 	// 1 = balanced, 0 = not balanced
-	// 우선 스택을 하나 만들어서 리스트 초반에 있는 여는 괄호들을 넣는다
-	// 마지막에 열린 괄호는 가장 먼저 닫혀야 하기 때문에(LIFO)
-	// 닫는 괄호가 나올 때마다 스택의 top에 있는 괄호와 짝이 맞는지 확인한다.
-	// 짝이 맞으면 pop하여 스택에서 제거하고, 안맞거나 스택이 비었으면 불균형으로 판단.
-	// 모든 문자를 검사한 후 스택이 비어 있으면 모든 괄호가 올바르게 닫힌 것이므로 balanced이다.
 }
 ////////////////////////////////////////////////////////////
 
